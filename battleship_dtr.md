@@ -58,12 +58,12 @@
 - Try Github projects revisit it on day 3
 
 ### Day 1 Agenda:
-  - Make DTR
-  - Submit DTR
-  - Setup Repo
-  - Start Slack Channel / integration
-  - Setup Github Project
-  - Assign evening tasks
-  - Set iteration deadline
+  - [ ]Make DTR
+  - [ ]Submit DTR
+  - [ ]Setup Repo
+  - [ ]Start Slack Channel / integration
+  - [ ]Setup Github Project
+  - [ ]Assign evening tasks
+  - [ ]Set iteration deadline
 
 ### Additional Notes:
