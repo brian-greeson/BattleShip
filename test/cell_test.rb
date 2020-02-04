@@ -17,17 +17,19 @@ class CellTest < Minitest::Test
   def test_it_has_a_coordinate
     assert_equal "B4", @cell.coordinate
   end
+
+  def test_it_start_without_a_ship
+    assert_nil nil, @cell.ship
+  end
+
+  def test_it_can_be_empty
+    assert_equal true, @cell.empty?
+  end
 end
 
 
 
 
-# pry(main)> cell.coordinate
-# # => "B4"
-#
-# pry(main)> cell.ship
-# # => nil
-#
 # pry(main)> cell.empty?
 # # => true
 #
