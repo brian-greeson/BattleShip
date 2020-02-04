@@ -1,5 +1,5 @@
 class Cell
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :have_we_been_fired_upon
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -25,8 +25,43 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if self.empty? == false
+      @ship.hit
+    end
+
     @have_we_been_fired_upon = true
+
+  end
+
+  def render(reveal = false)
+    return "S" if reveal
+
+    if @have_we_been_fired_upon == false
+      return "."
+    end
+    if @have_we_been_fired_upon == true && self.empty?
+      return "M"
+    end
+    if @have_we_been_fired_upon == true && self.empty? == false
+      return "H"
+    end
+    if @have_we_been_fired_upon == true && self.emtpy? == false && @ship.health == 0
+      return "X"
+    end
+
+
   end
 
 end
+
+
+
+
+
+#
+# ****************************************
+# ”.” if the cell has not been fired upon.
+# “M” if the cell has been fired upon and it does not contain a ship (the shot was a miss).
+# “H” if the cell has been fired upon and it contains a ship (the shot was a hit).
+# “X” if the cell has been fired upon and its ship has been sunk.
+# ****************************************

@@ -2,6 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/ship"
 require "./lib/cell"
+require "pry"
 
 
 class CellTest < Minitest::Test
@@ -49,20 +50,31 @@ class CellTest < Minitest::Test
     assert_equal true, @cell.fired_upon?
   end
 
+  def test_not_fired_upon_renders_a_period
+    assert_equal ".", @cell.render
+  end
+
+  def test_when_fired_upon_renders_m
+    @cell.fire_upon
+
+    assert_equal "M", @cell.render
+  end
+
+  def test_can_show_a_ship_not_fired_upon
+    cell_2 = Cell.new("C3")
+    cell_2.place_ship(@cruiser)
+    assert_equal ".", cell_2.render
+    assert_equal "S", cell_2.render(true)
+  end
+
+  def test_case_name
+
+  end
 end
 
-#
-# pry(main)> cell_1 = Cell.new("B4")
-# # => #<Cell:0x00007f84f11df920...>
-#
-# pry(main)> cell_1.render
-# # => "."
-#
-# pry(main)> cell_1.fire_upon
-#
-# pry(main)> cell_1.render
-# # => "M"
-#
+
+
+
 # pry(main)> cell_2 = Cell.new("C3")
 # # => #<Cell:0x00007f84f0b29d10...>
 #
@@ -70,13 +82,6 @@ end
 # # => #<Ship:0x00007f84f0ad4fb8...>
 #
 # pry(main)> cell_2.place_ship(cruiser)
-#
-# pry(main)> cell_2.render
-# # => "."
-#
-# # Indicate that we want to show a ship with the optional argument
-# pry(main)> cell_2.render(true)
-# # => "S"
 #
 # pry(main)> cell_2.fire_upon
 #
