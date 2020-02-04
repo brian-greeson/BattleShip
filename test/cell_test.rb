@@ -38,8 +38,15 @@ class CellTest < Minitest::Test
   end
 
   def test_it_starts_without_being_fired_upon
-    @cell.place_ship(@cruiser)
     assert_equal false, @cell.fired_upon?
+  end
+
+  def test_if_cell_can_be_fired_upon
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+
+    assert_equal 2, @cell.ship.health
+    assert_equal true, @cell.fired_upon?
   end
 
 
@@ -47,14 +54,7 @@ end
 
 
 
-# pry(main)> cell = Cell.new("B4")
-# # => #<Cell:0x00007f84f0ad4720...>
-#
-# pry(main)> cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0891238...>
-#
-# pry(main)> cell.place_ship(cruiser)
-#
+
 # pry(main)> cell.fired_upon?
 # # => false
 #

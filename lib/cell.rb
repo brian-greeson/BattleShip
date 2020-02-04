@@ -24,4 +24,9 @@ class Cell
     @have_we_been_fired_upon
   end
 
+  def fire_upon
+    @ship.hit
+    @have_we_been_fired_upon = true
+  end
+
 end
