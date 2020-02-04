@@ -8,6 +8,7 @@ class CellTest < Minitest::Test
 
   def setup
     @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   def test_it_exists
@@ -19,7 +20,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_start_without_a_ship
-    assert_nil nil, @cell.ship
+    assert_nil @cell.ship
   end
 
   def test_it_can_be_empty
@@ -27,23 +28,40 @@ class CellTest < Minitest::Test
   end
 
   def test_can_place_ship_in_cell
-    cruiser = Ship.new("Cruiser", 3)
-    @cell.place_ship(cruiser)
-    assert_equal cruiser, @cell.ship
+    @cell.place_ship(@cruiser)
+    assert_equal @cruiser, @cell.ship
   end
+
+  def test_is_not_empty_after_placing_ship
+    @cell.place_ship(@cruiser)
+    assert_equal false, @cell.empty?
+  end
+
+  def test_it_starts_without_being_fired_upon
+    @cell.place_ship(@cruiser)
+    assert_equal false, @cell.fired_upon?
+  end
+
 
 end
 
 
 
-
+# pry(main)> cell = Cell.new("B4")
+# # => #<Cell:0x00007f84f0ad4720...>
+#
 # pry(main)> cruiser = Ship.new("Cruiser", 3)
 # # => #<Ship:0x00007f84f0891238...>
 #
 # pry(main)> cell.place_ship(cruiser)
 #
-# pry(main)> cell.ship
-# # => #<Ship:0x00007f84f0891238...>
-#
-# pry(main)> cell.empty?
+# pry(main)> cell.fired_upon?
 # # => false
+#
+# pry(main)> cell.fire_upon
+#
+# pry(main)> cell.ship.health
+# # => 2
+#
+# pry(main)> cell.fired_upon?
+# # => true
