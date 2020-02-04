@@ -38,11 +38,3 @@ class ShipTest < Minitest::Test
   end
 
 end
-
-
-
-
-
-
-#cruiser.sunk?
-# #=> true
