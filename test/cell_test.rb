@@ -14,13 +14,14 @@ class CellTest < Minitest::Test
     assert_instance_of Cell, @cell
   end
 
+  def test_it_has_a_coordinate
+    assert_equal "B4", @cell.coordinate
+  end
 end
 
 
 
-# pry(main)> cell = Cell.new("B4")
-# # => #<Cell:0x00007f84f0ad4720...>
-#
+
 # pry(main)> cell.coordinate
 # # => "B4"
 #
