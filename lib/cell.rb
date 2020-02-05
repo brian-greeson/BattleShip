@@ -43,12 +43,12 @@ class Cell
       return "M"
     end
     if @have_we_been_fired_upon == true && self.empty? == false
-      return "H"
+      if @ship.health == 0
+        return "X"
+      else
+        return "H"
+      end
     end
-    if @have_we_been_fired_upon == true && self.emtpy? == false && @ship.health == 0
-      return "X"
-    end
-
 
   end
 

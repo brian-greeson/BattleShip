@@ -67,9 +67,15 @@ class CellTest < Minitest::Test
     assert_equal "S", cell_2.render(true)
   end
 
-  def test_case_name
-
+  def test_render_shows_hits
+    cell_2 = Cell.new("C3")
+    cell_2.place_ship(@cruiser)
+    cell_2.fire_upon
+    assert_equal "H", cell_2.render
   end
+
+  
+
 end
 
 
