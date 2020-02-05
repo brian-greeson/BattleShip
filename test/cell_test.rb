@@ -56,7 +56,6 @@ class CellTest < Minitest::Test
 
   def test_when_fired_upon_renders_m
     @cell.fire_upon
-
     assert_equal "M", @cell.render
   end
 
