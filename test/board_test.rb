@@ -13,8 +13,16 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
   end
 
-  def test_board_has_cells
+  def test_it_exists
     assert_instance_of Board, @board
+  end
+
+  def test_it_has_cells
+
+    assert_instance_of Hash, @board.cells
+    assert_instance_of Cell, @board.cells["A1"]
+    assert_instance_of Cell, @board.cells["D4"]
+    assert_nil @board.cells["D5"]
   end
 
 
