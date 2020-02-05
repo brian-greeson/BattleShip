@@ -13,7 +13,7 @@ class Ship
     else
       false
     end
-    
+
   end
 
   def hit
