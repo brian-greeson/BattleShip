@@ -1,9 +1,8 @@
 class Board
 
   def initialize(cells = {})
-
-    self.create_list_of_cells.each do |cell_coordinate|
-      @cell[cell_coordinate] = cell.New(cell_coordinate)
+    create_list_of_cells.each do |cell_coordinate|
+      @cell[cell_coordinate] = Cell.New(cell_coordinate)
     end
 
 
