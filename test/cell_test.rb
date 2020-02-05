@@ -74,35 +74,18 @@ class CellTest < Minitest::Test
     assert_equal "H", cell_2.render
   end
 
-  
+  def test_render_shows_ship_sunk
+    cell_2 = Cell.new("C3")
+    cell_2.place_ship(@cruiser)
+    cell_2.fire_upon
+    assert_equal false, @cruiser.sunk?
+    @cruiser.hit
+    cell_2.fire_upon
+    assert_equal false, @cruiser.sunk?
+    @cruiser.hit
+    assert_equal true, @cruiser.sunk?
+    assert_equal "X", cell_2.render
+
+  end
 
 end
-
-
-
-
-# pry(main)> cell_2 = Cell.new("C3")
-# # => #<Cell:0x00007f84f0b29d10...>
-#
-# pry(main)> cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0ad4fb8...>
-#
-# pry(main)> cell_2.place_ship(cruiser)
-#
-# pry(main)> cell_2.fire_upon
-#
-# pry(main)> cell_2.render
-# # => "H"
-#
-# pry(main)> cruiser.sunk?
-# # => false
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.sunk?
-# # => true
-#
-# pry(main)> cell_2.render
-# # => "X"

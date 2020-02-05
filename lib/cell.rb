@@ -25,7 +25,7 @@ class Cell
   end
 
   def fire_upon
-    if self.empty? == false
+    if self.empty? == false && @have_we_been_fired_upon == false
       @ship.hit
     end
 
@@ -53,15 +53,3 @@ class Cell
   end
 
 end
-
-
-
-
-
-#
-# ****************************************
-# ”.” if the cell has not been fired upon.
-# “M” if the cell has been fired upon and it does not contain a ship (the shot was a miss).
-# “H” if the cell has been fired upon and it contains a ship (the shot was a hit).
-# “X” if the cell has been fired upon and its ship has been sunk.
-# ****************************************
