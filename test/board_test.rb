@@ -13,6 +13,9 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
   end
 
+  def test_it_exists
+    assert_instance_of Board, @board
+  end
 
   def test_it_has_cells
 
