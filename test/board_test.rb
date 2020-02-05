@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-
+require "pry"
 
 class BoardTest < Minitest::Test
 
@@ -13,9 +13,6 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
   end
 
-  def test_board_has_cells
-    assert_instance_of Board, @board
-  end
 
 
 
