@@ -14,7 +14,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_cells
-    assert_instance_of Board, @board 
+    assert_instance_of Board, @board
   end
 
 
