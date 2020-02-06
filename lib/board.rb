@@ -28,7 +28,14 @@ class Board
     end
   end
 
-
+  def valid_placement?(ship, coordinates)
+    return false if coordinates.length != ship.length
+    valid = true
+    (1..ship.length - 1).each do |num|
+      valid = false if coordinates[num].sum != 1 + coordinates[num - 1].sum
+    end
+    valid
+  end
 
 
 end
