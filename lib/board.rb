@@ -6,6 +6,7 @@ class Board
     cell_names = create_list_of_cells
     cell_names.each do |cell_coordinate|
       @cells[cell_coordinate] = Cell.new(cell_coordinate)
+
     end
 
   end
@@ -32,8 +33,15 @@ class Board
       last_coord = coordinates[index].delete('0-9').sum + coordinates[index].delete('A-Z').to_i
       valid = false if this_coord != 1 + last_coord #simple hash values
     end
-
     valid
+  end
+
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates)
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    end
   end
 
 
