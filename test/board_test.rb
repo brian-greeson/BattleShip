@@ -66,4 +66,22 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
   end
 
+  def test_render_renders_board
+    expected1 = " 1 2 3 4 \n" +
+                "A . . . . \n" +
+                "B . . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+    expected2 = " 1 2 3 4 \n" +
+                "A S S S . \n" +
+                "B . . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+    assert_equal expected1, @board.render
+    assert_equal expected2, @board.render(true)
+
+
+  end
+
+
 end

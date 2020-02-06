@@ -31,7 +31,7 @@ class Board
     coordinates_empty = coordinates.all? do |coordinate|
       @cells[coordinate].empty?
     end
-    valid = coordinates_empty 
+    valid = coordinates_empty
 
     coordinates.drop(1).each_with_index do |coordinate, index| #found out about .drop() Yay!
       this_coord = coordinate.delete('0-9').sum + coordinate.delete('A-Z').to_i
@@ -46,6 +46,11 @@ class Board
       @cells[coordinate].place_ship(ship)
     end
   end
+
+  def render
+
+  end
+
 
 
 end
