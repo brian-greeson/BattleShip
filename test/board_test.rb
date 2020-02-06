@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-require "pry"
+
 
 class BoardTest < Minitest::Test
 
@@ -23,6 +23,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, @board.cells["A1"]
     assert_instance_of Cell, @board.cells["D4"]
     assert_nil @board.cells["D5"]
+    assert_equal "B3", @board.cells["B3"].coordinate
   end
 
 
