@@ -21,8 +21,6 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-
-
     if @cells.keys.include?(coordinate)
       true
     else
