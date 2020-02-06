@@ -7,11 +7,6 @@ class Board
     cell_names.each do |cell_coordinate|
       @cells[cell_coordinate] = Cell.new(cell_coordinate)
     end
-
-
-
-
-
   end
 
   def create_list_of_cells
@@ -23,5 +18,10 @@ class Board
     end
     cells_to_make
   end
+
+  def valid_placement?(ship, coordinates)
+
+  end
+
 
 end
