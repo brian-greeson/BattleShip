@@ -31,9 +31,10 @@ class Board
   def valid_placement?(ship, coordinates)
     return false if coordinates.length != ship.length
     valid = true
-    (1..ship.length - 1).each do |num|
-      valid = false if coordinates[num].sum != 1 + coordinates[num - 1].sum
+    coordinates.drop(1).each_with_index do |coordinate, index| #found out about .drop() Yay!
+      valid = false if coordinate.sum != 1 + coordinates[index].sum #Can't check total checksum because they have to be sequential (assending order)
     end
+
     valid
   end
 
