@@ -32,7 +32,9 @@ class Board
     return false if coordinates.length != ship.length
     valid = true
     coordinates.drop(1).each_with_index do |coordinate, index| #found out about .drop() Yay!
-      valid = false if coordinate.sum != 1 + coordinates[index].sum #Can't check total checksum because they have to be sequential (assending order)
+      this_coord = coordinate.delete('0-9').sum + coordinate.delete('A-Z').to_i
+      last_coord = coordinates[index].delete('0-9').sum + coordinates[index].delete('A-Z').to_i
+      valid = false if this_coord != 1 + last_coord #simple hash values
     end
 
     valid
