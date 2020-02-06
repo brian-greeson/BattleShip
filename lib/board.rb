@@ -21,11 +21,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    if @cells.keys.include?(coordinate)
-      true
-    else
-      false
-    end
+    @cells.keys.include?(coordinate)
   end
 
   def valid_placement?(ship, coordinates)
