@@ -36,6 +36,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_ship_placement_is_valid
+    #require "pry"; binding.pry
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])

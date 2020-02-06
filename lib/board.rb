@@ -28,6 +28,11 @@ class Board
   def valid_placement?(ship, coordinates)
     return false if coordinates.length != ship.length
     valid = true
+    coordinates_empty = coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
+    valid = coordinates_empty 
+
     coordinates.drop(1).each_with_index do |coordinate, index| #found out about .drop() Yay!
       this_coord = coordinate.delete('0-9').sum + coordinate.delete('A-Z').to_i
       last_coord = coordinates[index].delete('0-9').sum + coordinates[index].delete('A-Z').to_i
@@ -37,10 +42,8 @@ class Board
   end
 
   def place(ship, coordinates)
-    if valid_placement?(ship, coordinates)
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(ship)
-      end
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
     end
   end
 
