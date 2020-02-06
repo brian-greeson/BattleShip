@@ -60,4 +60,9 @@ class BoardTest < Minitest::Test
     assert_nil cell_4.ship
   end
 
+  def test_a_cell_can_only_have_one_ship
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
+  end
+
 end
