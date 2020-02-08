@@ -6,7 +6,6 @@ class Board
     cell_names = create_list_of_cells
     cell_names.each do |cell_coordinate|
       @cells[cell_coordinate] = Cell.new(cell_coordinate)
-
     end
 
   end
@@ -47,42 +46,54 @@ class Board
     end
   end
 
-  def render(reveal = false)
+  def render(reveal_ship = false)
     board_size = board_length
-
     rows = rows_in_board(board_size)
-    game_board = fill_rows_with_cells(rows)
+    game_board = fill_rows_with_cells(board_size, rows, reveal_ship)
 
-    require "pry"; binding.pry
+    format_game_board(board_size, rows, game_board)
   end
 
-  def cells_in_row(row, number_of_columns, reveal)
+  def cells_in_row(row, number_of_columns, reveal_ship)
     cells = []
-    number_of_columns.times do |current_column|
-      cell = "#{row}#{current_column + 1}"
-      cells << @cells[cell].render(reveal)
+    number_of_columns.times do |column|
+      cell = "#{row}#{column + 1}"
+      cells << @cells[cell].render(reveal_ship)
     end
     cells
   end
 
   def rows_in_board(number_of_rows)
     rows = []
-    number_of_rows.times do |current_row|
-      row = (current_row + 65).chr
-      rows << row
+    number_of_rows.times do |row|
+      row_label = (row + 65).chr
+      rows << row_label
     end
     rows
   end
 
-  def fill_rows_with_cells(rows)
+  def fill_rows_with_cells(board_size, rows, reveal_ship)
     rows_of_cells = []
-    rows.each do |current_row|
-      cells = cells_in_row(current_row, board_size, reveal)
+    rows.each do |row|
+      cells = cells_in_row(row, board_size, reveal_ship)
       rows_of_cells << cells
     end
     rows_of_cells
   end
 
+  def format_game_board(board_size, row_labels, cell_renders_by_rows)
+    formatted_game_board = ""
+    board_size.times do |column|
+      formatted_game_board += " #{column + 1}"
+    end
+    formatted_game_board += " \n"
+    board_size.times do |row|
+      formatted_game_board += "#{row_labels[row]} "
+      formatted_game_board += cell_renders_by_rows[row].join(" ")
+      formatted_game_board += " \n"
+    end
+    formatted_game_board
+  end
 
   def board_length
     Math.sqrt(@cells.size).to_i

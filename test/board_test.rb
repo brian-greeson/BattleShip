@@ -67,21 +67,21 @@ class BoardTest < Minitest::Test
   end
 
   def test_render_renders_board
+    @board.place(@cruiser, ["A1", "A2", "A3"])
     expected1 = " 1 2 3 4 \n" +
                 "A . . . . \n" +
                 "B . . . . \n" +
                 "C . . . . \n" +
                 "D . . . . \n"
+
     expected2 = " 1 2 3 4 \n" +
                 "A S S S . \n" +
                 "B . . . . \n" +
                 "C . . . . \n" +
                 "D . . . . \n"
+
     assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
-
-
   end
-
 
 end
