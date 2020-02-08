@@ -18,7 +18,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_cells
-
     assert_instance_of Hash, @board.cells
     assert_instance_of Cell, @board.cells["A1"]
     assert_instance_of Cell, @board.cells["D4"]
@@ -27,7 +26,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_coordinate_knows_if_a_coordinate_is_on_the_board
-
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
     assert_equal false, @board.valid_coordinate?("A5")
@@ -36,7 +34,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_ship_placement_is_valid
-    #require "pry"; binding.pry
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
@@ -82,6 +79,45 @@ class BoardTest < Minitest::Test
 
     assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
+  end
+
+  def test_render_renders_possible_ship_states
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected = " 1 2 3 4 \n" +
+                "A . . . . \n" +
+                "B . . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+
+    assert_equal expected, @board.render
+
+    @board.cells["A1"].fire_upon
+    expected = " 1 2 3 4 \n" +
+                "A H . . . \n" +
+                "B . . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"    
+
+    assert_equal expected, @board.render
+
+    @board.cells["B1"].fire_upon
+    expected = " 1 2 3 4 \n" +
+                "A H . . . \n" +
+                "B M . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+
+    assert_equal expected, @board.render
+
+    @board.cells["A2"].fire_upon
+    @board.cells["A3"].fire_upon
+    expected = " 1 2 3 4 \n" +
+                "A X X X . \n" +
+                "B M . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+
+    assert_equal expected, @board.render
   end
 
 end
