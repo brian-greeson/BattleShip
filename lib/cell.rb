@@ -1,5 +1,5 @@
 class Cell
-  attr_reader :coordinate, :ship, :have_we_been_fired_upon
+  attr_reader :coordinate, :ship
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -9,11 +9,6 @@ class Cell
 
   def empty?
     @ship == nil
-    # if @ship == nil
-    #   return true
-    # else
-    #   return false
-    # end
   end
 
   def place_ship(ship_parameter)
@@ -25,12 +20,8 @@ class Cell
   end
 
   def fire_upon
-    if self.empty? == false && @have_we_been_fired_upon == false
-      @ship.hit
-    end
-
+    @ship.hit if !empty? && !@have_we_been_fired_upon
     @have_we_been_fired_upon = true
-
   end
 
   def render(reveal = false)
