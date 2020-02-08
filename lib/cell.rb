@@ -34,22 +34,16 @@ class Cell
   end
 
   def render(reveal = false)
-    return "S" if reveal && !empty?
-
-    if @have_we_been_fired_upon == false
-      return "."
+    cell_status = "."
+    if empty?
+      cell_status = "M" if @have_we_been_fired_upon
+    elsif @have_we_been_fired_upon && @ship.health == 0
+        cell_status = "X"
+    elsif @have_we_been_fired_upon
+        cell_status = "H"
+    elsif reveal
+      cell_status = "S"
     end
-    if @have_we_been_fired_upon == true && self.empty?
-      return "M"
-    end
-    if @have_we_been_fired_upon == true && self.empty? == false
-      if @ship.health == 0
-        return "X"
-      else
-        return "H"
-      end
-    end
-
+    cell_status
   end
-
 end
