@@ -34,7 +34,7 @@ class Cell
   end
 
   def render(reveal = false)
-    return "S" if reveal
+    return "S" if reveal && !empty?
 
     if @have_we_been_fired_upon == false
       return "."
