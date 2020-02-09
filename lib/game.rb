@@ -1,4 +1,3 @@
-
 class Game
 
   attr_reader :game_state
@@ -10,7 +9,8 @@ class Game
   def main_menu(user_input = nil)
     puts "Welcome to BATTLESHIP./nEnter p to play. Enter q to quit."
     user_input = gets.chomp if !user_input
-    @game_state = :quit if user_input.downcase == "q" 
+    @game_state = :quit if user_input.downcase == "q"
+    @game_state = :play if user_input.downcase == "p"
   end
 
 end
