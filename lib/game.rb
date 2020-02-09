@@ -8,9 +8,11 @@ class Game
 
   def main_menu(user_input = nil)
     puts "Welcome to BATTLESHIP./nEnter p to play. Enter q to quit."
-    user_input = gets.chomp if !user_input
-    @game_state = :quit if user_input.downcase == "q"
-    @game_state = :play if user_input.downcase == "p"
+    user_input = gets.chomp.downcase if !user_input
+
+    @game_state = :main_menu if user_input != "q" || user_input != "p"
+    @game_state = :quit if user_input == "q"
+    @game_state = :play if user_input == "p"
   end
 
 end

@@ -23,11 +23,15 @@ class GameTest < Minitest::Test
     user_input = "q"
     @game.main_menu(user_input)
     assert_equal :quit, @game.game_state
+
+    user_input = "w"
+    @game.main_menu(user_input)
+    refute_equal :quit, @game.game_state
   end
 
   def test_user_can_play_game_from_main_menu
     user_input = "p"
     @game.main_menu(user_input)
-    assert_equal :play, @game.game_state 
+    assert_equal :play, @game.game_state
   end
 end
