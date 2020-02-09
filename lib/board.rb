@@ -27,23 +27,21 @@ class Board
   def valid_placement?(ship, coordinates)
     return false if coordinates.length != ship.length
     valid = true
-    coordinates_empty = coordinates.all? do |coordinate|
-      @cells[coordinate].empty?
-    end
-    valid = coordinates_empty
-
-    coordinates.drop(1).each_with_index do |coordinate, index| #found out about .drop() Yay!
-      this_coord = coordinate.delete('0-9').sum + coordinate.delete('A-Z').to_i
-      last_coord = coordinates[index].delete('0-9').sum + coordinates[index].delete('A-Z').to_i
-      valid = false if this_coord != 1 + last_coord #simple hash values
+    valid = coordinates.all? {|coordinate| @cells[coordinate].empty?}
+    coordinates.drop(1).each_with_index do |coordinate, index|
+      this_coord = convert_coordinate_to_numeric_value(coordinate)
+      last_coord = convert_coordinate_to_numeric_value(coordinates[index])
+      valid = false if this_coord != 1 + last_coord
     end
     valid
   end
 
+  def convert_coordinate_to_numeric_value(coordinate_to_convert)
+     coordinate_to_convert.delete('0-9').sum + coordinate_to_convert.delete('A-Z').to_i
+  end
+
   def place(ship, coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(ship)
-    end
+      coordinates.each {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
   def render(reveal_ship = false)

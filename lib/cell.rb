@@ -28,7 +28,7 @@ class Cell
     cell_status = "."
     if empty?
       cell_status = "M" if @have_we_been_fired_upon
-    elsif @have_we_been_fired_upon && @ship.health == 0
+    elsif @have_we_been_fired_upon && @ship.sunk?
         cell_status = "X"
     elsif @have_we_been_fired_upon
         cell_status = "H"
