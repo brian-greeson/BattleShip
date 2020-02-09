@@ -1,9 +1,13 @@
 class Game
 
-  attr_reader :game_state
+  attr_reader :game_state, :board, :ships
 
   def initialize(game_state = :main_menu)
     @game_state = game_state
+    @board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    @ships = {cruiser: cruiser, submarine: submarine}
   end
 
   def main_menu(user_input = nil)
