@@ -42,20 +42,23 @@ class GameTest < Minitest::Test
     assert_equal :play, @game.game_state
   end
 
-  def test_game_has_board_by_default
-    assert_instance_of Board, @game.board
+  def test_computer_can_generate_random_cells
+
+    assert_equal true, @game.computer_board.cells.has_key?(@game.random_cell)
+    refute_equal @game.random_cell, @game.random_cell
   end
 
+  # def test_computer_generates_coordinates
+  #   have the computer place ships by calling a method at this line
+  #
+  #
+  #   subany?  check computer board cells .any? to include a sub
+  #   cruiser?  check computer board cells .any? to include a cruiser
+  #
+  #   assert_equal true ,subany?
+  #   assert_equal true ,cruiserany?
+  # end
 
-  def test_computer_can_place_ships
-    board = Board.new
 
-  end
+
 end
-
-
-# 1) Failure:
-# GameTest#test_it_has_ships [test/game_test.rb:22]:
-# No visible difference in the Hash#inspect output.
-# You should look at the implementation of #== on Hash or its members.
-# {:cruiser=>#<Ship:0xXXXXXX @name="Cruiser", @length=3, @health=3>, :submarine=>#<Ship:0xXXXXXX @name="Submarine", @length=2, @health=2>}

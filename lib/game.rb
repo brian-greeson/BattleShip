@@ -1,13 +1,13 @@
 class Game
 
-  attr_reader :game_state, :board, :ships
+  attr_reader :game_state, :board, :ships, :computer_board
 
   def initialize(game_state = :main_menu)
     @game_state = game_state
-    @board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     @ships = {cruiser: cruiser, submarine: submarine}
+    @computer_board = Board.new
   end
 
   def main_menu(user_input = nil)
@@ -19,6 +19,21 @@ class Game
     @game_state = :play if user_input == "p"
   end
 
+  def random_cell
+    @computer_board.cells.keys.sample
+  end
+
+  def place_computer_ships
+     @ships.each do |ship|
+       coordinates_to place
+     end
+  end
+
+  def start_game
+
+  end
+
+
 end
 
 
@@ -29,6 +44,8 @@ end
 #
 # ---setup phase
 # computer places ships
+ # -get_random corrdinet for each ship
+ # -
 #
 # player places ships
 #

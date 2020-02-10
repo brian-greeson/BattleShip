@@ -4,7 +4,8 @@ class ComputerPlayer
 
   end
 
-  def place_ship
+  def get_coordinates_for_ship
 
   end
+
 end
