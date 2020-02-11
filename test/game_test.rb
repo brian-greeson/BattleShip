@@ -48,6 +48,30 @@ class GameTest < Minitest::Test
     refute_equal @game.random_cell, @game.random_cell
   end
 
+  def test_computer_chooses_cells_equal_to_ships_lengths
+    assert_equal 3, @game.cells_for_computer_ship(@cruiser).length
+  end
+
+  def test_computer_finds_valid_coordinates
+    cells_for_ship = @game.cells_for_computer_ship(@cruiser)
+    assert_equal true, cells_for_ship.all? {|cell| @game.computer_board.valid_coordinate?(cell)}
+  end
+
+
+  # end
+  # def test_computer_finds_valid_placement
+  #   skip
+  #   cells_for_ship = @game.cells_for_computer_ship(@cruiser)
+  #
+  #   until @game.computer_board.valid_placement?(@cruiser, cells_for_ship)
+  #     cells_for_ship = @game.cells_for_computer_ship(@cruiser)
+  #   end
+  #   assert_equal true, @game.computer_board.valid_placement?(@cruiser, cells_for_ship)
+  #
+  # end
+
+
+
   # def test_computer_generates_coordinates
   #   have the computer place ships by calling a method at this line
   #
