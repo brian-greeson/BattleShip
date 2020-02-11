@@ -20,7 +20,7 @@ class BoardTest < Minitest::Test
   def test_it_has_cells
     assert_instance_of Hash, @board.cells
     assert_instance_of Cell, @board.cells["A1"]
-    assert_instance_of Cell, @board.cells["D4"]
+    assert_equal 16, @board.cells.length
     assert_nil @board.cells["D5"]
     assert_equal "B3", @board.cells["B3"].coordinate
   end
@@ -46,21 +46,22 @@ class BoardTest < Minitest::Test
   end
 
   def test_can_place_ship_in_cell
+    assert_nil @board.cells["A1"].ship
+    assert_nil @board.cells["A2"].ship
+    assert_nil @board.cells["A3"].ship
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    cell_1 = @board.cells["A1"]
-    cell_2 = @board.cells["A2"]
-    cell_3 = @board.cells["A3"]
-    cell_4 = @board.cells["B2"]
-    assert_equal @cruiser, cell_1.ship
-    assert_equal @cruiser, cell_2.ship
-    assert_equal @cruiser, cell_3.ship
-    assert_equal cell_3.ship, cell_2.ship
-    assert_nil cell_4.ship
+
+    assert_equal @cruiser, @board.cells["A1"].ship
+    assert_equal @cruiser, @board.cells["A2"].ship
+    assert_equal @cruiser, @board.cells["A3"].ship
   end
 
   def test_a_cell_can_only_have_one_ship
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
+    @board.place(@submarine, ["A1", "A2", "A3"])
+    refute_equal @submarine, @board.cells["A1"]
+
   end
 
   def test_render_renders_board
