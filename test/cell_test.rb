@@ -57,9 +57,9 @@ class CellTest < Minitest::Test
   end
 
   def test_when_empty_cell_is_fired_upon_renders_M
-    @cell.fire_upon
-    assert_equal true, @cell.fired_upon?
     refute_equal "M", @cell.render
+    @cell.fire_upon
+
     assert_equal true, @cell.empty?
     assert_equal "M", @cell.render
   end
@@ -67,6 +67,7 @@ class CellTest < Minitest::Test
   def test_can_show_a_ship_not_fired_upon
     refute_equal "S", @cell.render(true)
     @cell.place_ship(@cruiser)
+
     refute_equal "S", @cell.render
     assert_equal "S", @cell.render(true)
   end
@@ -76,6 +77,7 @@ class CellTest < Minitest::Test
     refute_equal "H", @cell.render
     assert_equal false, @cell.empty?
     @cell.fire_upon
+
     assert_equal "H", @cell.render
     assert_equal false, @cell.ship.sunk?
   end
@@ -83,11 +85,12 @@ class CellTest < Minitest::Test
   def test_render_shows_ship_sunk
     @cell.place_ship(@cruiser)
     @cell.fire_upon
+
     refute_equal "X", @cell.render
     assert_equal false, @cruiser.sunk?
-    @cell.fire_upon
-    assert_equal false, @cruiser.sunk?
-    @cell.fire_upon
+    @cruiser.hit
+    @cruiser.hit
+
     assert_equal true, @cruiser.sunk?
     assert_equal "X", @cell.render
   end
