@@ -2,8 +2,6 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/ship"
 require "./lib/cell"
-require "pry"
-
 
 class CellTest < Minitest::Test
 
@@ -24,16 +22,18 @@ class CellTest < Minitest::Test
     assert_nil @cell.ship
   end
 
-  def test_it_can_be_empty
+  def test_it_starts_empty
     assert_equal true, @cell.empty?
   end
 
   def test_can_place_ship_in_cell
+    assert_nil @cell.ship
     @cell.place_ship(@cruiser)
     assert_equal @cruiser, @cell.ship
   end
 
   def test_is_not_empty_after_placing_ship
+    assert_equal true, @cell.empty?
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.empty?
   end
@@ -44,47 +44,52 @@ class CellTest < Minitest::Test
 
   def test_if_cell_can_be_fired_upon
     @cell.place_ship(@cruiser)
+    assert_equal false, @cell.fired_upon?
+    assert_equal 3, @cell.ship.health
     @cell.fire_upon
-
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon?
   end
 
   def test_not_fired_upon_renders_a_period
+    assert_equal false, @cell.fired_upon?
     assert_equal ".", @cell.render
   end
 
-  def test_when_fired_upon_renders_m
+  def test_when_empty_cell_is_fired_upon_renders_M
     @cell.fire_upon
+    assert_equal true, @cell.fired_upon?
+    refute_equal "M", @cell.render
+    assert_equal true, @cell.empty?
     assert_equal "M", @cell.render
   end
 
   def test_can_show_a_ship_not_fired_upon
-    cell_2 = Cell.new("C3")
-    cell_2.place_ship(@cruiser)
-    assert_equal ".", cell_2.render
-    assert_equal "S", cell_2.render(true)
+    refute_equal "S", @cell.render(true)
+    @cell.place_ship(@cruiser)
+    refute_equal "S", @cell.render
+    assert_equal "S", @cell.render(true)
   end
 
-  def test_render_shows_hits
-    cell_2 = Cell.new("C3")
-    cell_2.place_ship(@cruiser)
-    cell_2.fire_upon
-    assert_equal "H", cell_2.render
+  def test_render_shows_hits_when_fired_upon_and_cell_not_empty
+    @cell.place_ship(@cruiser)
+    refute_equal "H", @cell.render
+    assert_equal false, @cell.empty?
+    @cell.fire_upon
+    assert_equal "H", @cell.render
+    assert_equal false, @cell.ship.sunk?
   end
 
   def test_render_shows_ship_sunk
-    cell_2 = Cell.new("C3")
-    cell_2.place_ship(@cruiser)
-    cell_2.fire_upon
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+    refute_equal "X", @cell.render
     assert_equal false, @cruiser.sunk?
-    @cruiser.hit
-    cell_2.fire_upon
+    @cell.fire_upon
     assert_equal false, @cruiser.sunk?
-    @cruiser.hit
+    @cell.fire_upon
     assert_equal true, @cruiser.sunk?
-    assert_equal "X", cell_2.render
-
+    assert_equal "X", @cell.render
   end
 
 end
