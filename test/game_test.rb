@@ -42,32 +42,20 @@ class GameTest < Minitest::Test
     assert_equal :play, @game.game_state
   end
 
-  def test_computer_can_generate_random_cells
-
-    assert_equal true, @game.computer_board.cells.has_key?(@game.random_cell)
-    refute_equal @game.random_cell, @game.random_cell
-  end
-
-  def test_computer_chooses_cells_equal_to_ships_lengths
-    assert_equal 3, @game.cells_for_computer_ship(@cruiser).length
-  end
-
-  def test_computer_finds_valid_coordinates
-    cells_for_ship = @game.cells_for_computer_ship(@cruiser)
-    assert_equal true, cells_for_ship.all? {|cell| @game.computer_board.valid_coordinate?(cell)}
-  end
+  
+end
 
 
-  # end
   # def test_computer_finds_valid_placement
+  #
   #   skip
   #   cells_for_ship = @game.cells_for_computer_ship(@cruiser)
   #
   #   until @game.computer_board.valid_placement?(@cruiser, cells_for_ship)
   #     cells_for_ship = @game.cells_for_computer_ship(@cruiser)
   #   end
-  #   assert_equal true, @game.computer_board.valid_placement?(@cruiser, cells_for_ship)
-  #
+    # assert_equal true, @game.computer_board.valid_placement?(@cruiser, cells_for_ship)
+    # assert_equal 11, @game.computer_board.cells.empty?
   # end
 
 
@@ -82,7 +70,3 @@ class GameTest < Minitest::Test
   #   assert_equal true ,subany?
   #   assert_equal true ,cruiserany?
   # end
-
-
-
-end
