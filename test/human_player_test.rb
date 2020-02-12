@@ -10,7 +10,10 @@ require './lib/human_player'
 class HumanPlayerTest < Minitest::Test
 
   def setup
-    @player1 = HumanPlayer.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [@cruiser, @submarine]
+    @player1 = HumanPlayer.new(@ships)
   end
 
   def test_it_exists
@@ -24,7 +27,8 @@ class HumanPlayerTest < Minitest::Test
   def test_it_receives_greeting
     expected = "I have laid out my ships on the grid.\n" +
               "You now need to lay out your two ships.\n" +
-              "The Cruiser is three units long and the Submarine is two units long."
+              "The #{@ships[0].name} is three units long and the #{@ships[1].name} is two units long."
+
     assert_equal expected, @player1.greeting
   end
 
@@ -37,16 +41,12 @@ class HumanPlayerTest < Minitest::Test
     assert_equal expected, @player1.board.render
   end
 
+  def test_it_gets_cells_from_players_input
+    Kernel.stubs(:gets).returns("A1 A2 A3")
+    assert_equal ["A1", "A2", "A3"], @player1.get_cells
+  end
 
 
-  # def test_player_receives_opening_message
-  #   assert_equal
-  #
-  #     1 2 3 4
-  #     A . . . .
-  #     B . . . .
-  #     C . . . .
-  #     D . . . .
-  #     Enter the squares for the Cruiser (3 spaces):, @player1.greeting
-  # end
+
+
 end
