@@ -15,7 +15,7 @@ class ComputerPlayer
     all_coords_valid = false
     until all_coords_valid
       selected_cells = consecutive_cells(random_empty_cell, random_direction, ship.length)
-      if selected_cells.all? {|coord| @board.cells.keys.include?(coord)}
+      if selected_cells.all? {|cell| @board.cells.keys.include?(cell)}
         all_coords_valid = true
       else
         selected_cells = []
@@ -26,17 +26,17 @@ class ComputerPlayer
 
   def consecutive_cells(cell, direction, ship_length)
     coord = split_cell_coordinate(cell)
-    cells_for_ship = []
+    cells = []
     if direction == :horizontal
       ship_length.times do |column_offset|
-        cells_for_ship << "#{coord[:row]}#{coord[:column] + column_offset}"
+        cells << "#{coord[:row]}#{coord[:column] + column_offset}"
       end
     else
       ship_length.times do |row_offset|
-        cells_for_ship << "#{(coord[:row].ord + row_offset).chr}#{coord[:column]}"
+        cells << "#{(coord[:row].ord + row_offset).chr}#{coord[:column]}"
       end
     end
-    cells_for_ship
+    cells
   end
 
   def split_cell_coordinate(cell)

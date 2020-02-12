@@ -41,15 +41,15 @@ class ComputerPlayerTest < Minitest::Test
   def test_it_chooses_valid_coordinates_for_cells_to_place_ship
     cruiser = Ship.new("cruiser", 3)
     @todd.stubs(:random_empty_cell).returns("A1")
-    @todd.stubs(:choose_direction).returns(:horizontal)
+    @todd.stubs(:random_direction).returns(:horizontal)
 
     assert_equal ["A1", "A2", "A3"], @todd.cells_to_place_ship(cruiser)
-    @todd.stubs(:choose_direction).returns(:vertical)
+    @todd.stubs(:random_direction).returns(:vertical)
     assert_equal ["A1", "B1", "C1"], @todd.cells_to_place_ship(cruiser)
   end
 
   def test_it_can_choose_direction
-    assert_instance_of Symbol, @todd.choose_direction
+    assert_instance_of Symbol, @todd.random_direction
   end
 
   def test_it_can_place_a_ships
