@@ -11,33 +11,42 @@ class ComputerPlayer
   end
 
   def cells_to_place_ship(ship)
-    cells_for_ship = []
+    selected_cells = []
     all_coords_valid = false
     until all_coords_valid
-      cell = random_empty_cell
-      cell_column = cell.delete("A-Z").to_i
-      cell_row = cell.delete("0-9")
-      if choose_direction == :horizontal
-        ship.length.times do |column_offset|
-          cells_for_ship << "#{cell_row}#{cell_column + column_offset}"
-        end
-      else
-        ship.length.times do |row_offset|
-          cells_for_ship << "#{(cell_row.ord + row_offset).chr}#{cell_column}"
-        end
-      end
-      if cells_for_ship.all? {|cell_choice| @board.cells.keys.include?(cell_choice)}
+      selected_cells = consecutive_cells(random_empty_cell, random_direction, ship.length)
+      if selected_cells.all? {|cell| @board.cells.keys.include?(cell)}
         all_coords_valid = true
       else
-        cells_for_ship = []
+        selected_cells = []
       end
     end
-    cells_for_ship
+    selected_cells
   end
 
+  def consecutive_cells(cell, direction, ship_length)
+    coord = split_cell_coordinate(cell)
+    cells = []
+    if direction == :horizontal
+      ship_length.times do |column_offset|
+        cells << "#{coord[:row]}#{coord[:column] + column_offset}"
+      end
+    else
+      ship_length.times do |row_offset|
+        cells << "#{(coord[:row].ord + row_offset).chr}#{coord[:column]}"
+      end
+    end
+    cells
+  end
 
+  def split_cell_coordinate(cell)
+    coordinate = {}
+    coordinate[:column] = cell.delete("A-Z").to_i
+    coordinate[:row] = cell.delete("0-9")
+    coordinate
+  end
 
-  def choose_direction
+  def random_direction
     [:vertical, :horizontal].sample
   end
 
