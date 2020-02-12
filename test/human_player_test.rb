@@ -46,6 +46,26 @@ class HumanPlayerTest < Minitest::Test
     assert_equal ["A1", "A2", "A3"], @player1.get_cells
   end
 
+  def test_place_ship
+    Kernel.stubs(:gets).returns("A1 A2 A3")
+    @player1.place_ship(@cruiser)
+    Kernel.stubs(:gets).returns("B1 B2")
+    @player1.place_ship(@submarine)
+    result = @player1.board.cells.values.count {|cell| !cell.ship}
+
+    assert_equal @cruiser, @player1.board.cells["A1"].ship
+    assert_equal @cruiser, @player1.board.cells["A2"].ship
+    assert_equal @cruiser, @player1.board.cells["A3"].ship
+    assert_equal @submarine, @player1.board.cells["B1"].ship
+    assert_equal @submarine, @player1.board.cells["B2"].ship
+    assert_equal 11, result
+  end
+
+  def test place_ships
+
+
+  end
+
 
 
 
