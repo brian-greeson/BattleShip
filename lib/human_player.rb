@@ -21,17 +21,21 @@ class HumanPlayer
     all_coords_valid = cells.all? { |cell| @board.valid_coordinate?(cell)}
     if all_coords_valid && @board.valid_placement?(ship, cells)
       @board.place(ship, cells)
+    else
+      return false
     end
   end
 
   def place_ships
     puts greeting
-
     @ships.each do |ship|
       puts @board.render(true)
       puts "Enter the squares for the #{ship.name} (#{ship.length} spaces):"
-      place_ship(ship)
+      until place_ship(ship)
+        puts "Those are invalid coordinates. Please try again:"
+      end
     end
+    
     puts @board.render(true)
   end
 
