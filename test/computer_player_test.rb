@@ -22,7 +22,12 @@ class ComputerPlayerTest < Minitest::Test
 
 
   def test_it_can_generate_random_cells
-    assert_equal true, @todd.board.cells.has_key?(@todd.random_cell)
+    a_ship = mock("Shippy McShipface")
+    assert_equal true, @todd.board.cells.has_key?(@todd.random_empty_cell)
+
+    @todd.board.cells["A1"].place_ship(a_ship)
+
+    assert_equal 15, @todd.board.cells.values.count {|cell| !cell.ship}
   end
 
   def test_it_chooses_cells_equal_to_ships_lengths
@@ -35,7 +40,7 @@ class ComputerPlayerTest < Minitest::Test
 
   def test_it_chooses_valid_coordinates_for_cells_to_place_ship
     cruiser = Ship.new("cruiser", 3)
-    @todd.stubs(:random_cell).returns("A1")
+    @todd.stubs(:random_empty_cell).returns("A1")
     @todd.stubs(:choose_direction).returns(:horizontal)
 
     assert_equal ["A1", "A2", "A3"], @todd.cells_to_place_ship(cruiser)

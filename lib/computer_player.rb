@@ -5,7 +5,8 @@ class ComputerPlayer
     @board = Board.new
   end
 
-  def random_cell(cells = @board.cells)
+  def random_empty_cell(cells = @board.cells)
+    cells.select! {|coord,cell| !cell.ship}
     cells.keys.sample
   end
 
@@ -13,7 +14,7 @@ class ComputerPlayer
     cells_for_ship = []
     all_coords_valid = false
     until all_coords_valid
-      cell = random_cell
+      cell = random_empty_cell
       cell_column = cell.delete("A-Z").to_i
       cell_row = cell.delete("0-9")
       if choose_direction == :horizontal
