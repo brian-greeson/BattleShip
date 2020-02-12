@@ -58,12 +58,13 @@ class HumanPlayerTest < Minitest::Test
     assert_equal @cruiser, @player1.board.cells["A3"].ship
     assert_equal @submarine, @player1.board.cells["B1"].ship
     assert_equal @submarine, @player1.board.cells["B2"].ship
-    assert_equal 11, result
+
   end
 
-  def test place_ships
-
-
+  def test_place_ships
+    @player1.place_ships
+    result = @player1.board.cells.values.count {|cell| !cell.ship}
+    assert_equal 11, result
   end
 
 

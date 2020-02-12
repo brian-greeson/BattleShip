@@ -13,7 +13,6 @@ class HumanPlayer
   end
 
   def get_cells
-    # puts "Enter the squares for the Submarine (2 spaces):"
     answer = Kernel.gets.chomp.split(" ")
   end
 
@@ -24,4 +23,19 @@ class HumanPlayer
       @board.place(ship, cells)
     end
   end
+
+  def place_ships
+    puts greeting
+
+    @ships.each do |ship|
+      puts @board.render(true)
+      puts "Enter the squares for the #{ship.name} (#{ship.length} spaces):"
+      place_ship(ship)
+    end
+    puts @board.render(true)
+  end
+
+
+
+
 end
