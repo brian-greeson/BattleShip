@@ -6,7 +6,7 @@ class Game
     @game_state = game_state
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    @ships = {cruiser: cruiser, submarine: submarine}
+    @ships = [cruiser, submarine]
     @computer_board = Board.new
   end
 
@@ -23,7 +23,7 @@ class Game
 
 
 
-  
+
 
   def start_game
 
