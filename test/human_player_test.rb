@@ -51,7 +51,6 @@ class HumanPlayerTest < Minitest::Test
     @player1.place_ship(@cruiser)
     Kernel.stubs(:gets).returns("B1 B2")
     @player1.place_ship(@submarine)
-    result = @player1.board.cells.values.count {|cell| !cell.ship}
 
     assert_equal @cruiser, @player1.board.cells["A1"].ship
     assert_equal @cruiser, @player1.board.cells["A2"].ship
@@ -67,7 +66,11 @@ class HumanPlayerTest < Minitest::Test
     assert_equal 11, result
   end
 
+  def test_it_picks_valid_cells_to_fire_upon
+    Kernel.stubs(:gets).returns("A1")
 
 
+    assert_equal "A1", @player1.pick_cell_to_fire_on
+  end
 
 end
