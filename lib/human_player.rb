@@ -13,7 +13,7 @@ class HumanPlayer
   end
 
   def get_cells
-    answer = Kernel.gets.chomp.split(" ")
+    Kernel.gets.chomp.split(" ")
   end
 
   def place_ship(ship)

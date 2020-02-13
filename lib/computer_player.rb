@@ -5,9 +5,9 @@ class ComputerPlayer
     @board = Board.new
   end
 
-  def random_empty_cell(cells = @board.cells)
-    cells.select! {|coord,cell| !cell.ship}
-    cells.keys.sample
+  def random_empty_cell(cells = @board.cells) #<---- ask why is this setting them to same obj?
+    empty_cells = cells.reject {|coord,cell| cell.ship}
+    empty_cells.keys.sample
   end
 
   def cells_to_place_ship(ship)
@@ -21,6 +21,7 @@ class ComputerPlayer
         selected_cells = []
       end
     end
+
     selected_cells
   end
 
@@ -59,7 +60,6 @@ class ComputerPlayer
   def place_one_ship(ship)
     cells = cells_to_place_ship(ship)
     @board.place(ship, cells)
-
   end
 
 
