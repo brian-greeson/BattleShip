@@ -40,23 +40,23 @@ class HumanPlayer
   end
 
   def pick_cell_to_fire_on(opponents_board)
-    valid_selection = false
     puts "Enter the coordinate for your shot:"
     cell_to_fire_on = Kernel.gets.upcase.chomp
-    until valid_selection
-      if opponents_board.cells[cell_to_fire_on].fired_upon?
-        valid_selection = false
-      end
-      if opponents_board.valid_coordinate?(cell_to_fire_on)
-        valid_selection = true
-      end
 
+    until valid_selection?(opponents_board, cell_to_fire_on)
       puts "Please enter a valid coordinate:"
       cell_to_fire_on = Kernel.gets.upcase.chomp
     end
     cell_to_fire_on
   end
 
+  def valid_selection?(opponents_board, cell_to_fire_on)
+    valid_selection = false
+    if opponents_board.valid_coordinate?(cell_to_fire_on) && !opponents_board.cells[cell_to_fire_on].fired_upon?
+      valid_selection = true
+    end
+    valid_selection
+  end
 
 
 

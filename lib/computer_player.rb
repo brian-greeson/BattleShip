@@ -62,8 +62,9 @@ class ComputerPlayer
     @board.place(ship, cells)
   end
 
+  def pick_cell_to_fire_on(opponents_board)
+    unfired_cells = opponents_board.cells.reject {|coord, cell| cell.fired_upon?}.keys
+    unfired_cells.sample    
+  end
 
 end
-
-# getting random cell
-# using random cell as root for rest of cells up to lenght of ship

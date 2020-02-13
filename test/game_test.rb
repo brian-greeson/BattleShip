@@ -47,32 +47,4 @@ class GameTest < Minitest::Test
     assert_equal :setup, @game.game_state
   end
 
-  def test_user_sees_both_boards_at_start_of_turn
-
-  #   @game.players[:computer_player].board.cells["A1"].fire_upon
-  #   @game.players[:computer_player].board.cells["A4"].fire_upon
-  #   @game.players[:player1].board.cells["A1"].place_ship(@cruiser)
-  #   @game.players[:player1].board.cells["A2"].place_ship(@cruiser)
-  #   @game.players[:player1].board.cells["A3"].place_ship(@cruiser)
-  #   @game.players[:player1].board.cells["C3"].place_ship(@submarine)
-  #   @game.players[:player1].board.cells["D3"].place_ship(@submarine)
-  #   @game.players[:player1].board.cells["B2"].fire_upon
-  #   @game.players[:player1].board.cells["C1"].fire_upon
-  #
-  #   expected = "=============COMPUTER BOARD=============\n" +
-  #              " 1 2 3 4 \n" +
-  #              "A M . . M \n" +
-  #              "B . . . . \n" +
-  #              "C . . . . \n" +
-  #              "D . . . . \n" +
-  #              "==============PLAYER BOARD==============\n" +
-  #              " 1 2 3 4 \n" +
-  #              "A S S S . \n" +
-  #              "B . M . . \n" +
-  #              "C M . S . \n" +
-  #              "D . . S . "
-  #
-  # assert_equal expected, @game.display_boards
-  end
-
 end

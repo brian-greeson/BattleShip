@@ -20,7 +20,6 @@ class ComputerPlayerTest < Minitest::Test
     assert_instance_of Board, @todd.board
   end
 
-
   def test_it_can_generate_random_cells
     a_ship = mock("Shippy McShipface")
     assert_equal true, @todd.board.cells.has_key?(@todd.random_empty_cell)
@@ -56,19 +55,11 @@ class ComputerPlayerTest < Minitest::Test
     cruiser = Ship.new("cruiser", 3)
     submarine = Ship.new("submarine", 2)
     ships = [cruiser, submarine]
-
     @todd.place_all_ships(ships)
-    # require "pry"; binding.pry
-    # assert_equal 3,  @todd.board.cells.values.count {|cell| cell.ship.name == "cruiser"}
-    # assert_equal 2,  @todd.board.cells.values.count {|cell| cell.ship.name == "submarine"}
+    
+    assert_equal 3,  @todd.board.cells.values.count {|cell| cell.ship && (cell.ship.name == "cruiser")}
+    assert_equal 2,  @todd.board.cells.values.count {|cell| cell.ship && (cell.ship.name == "submarine")}
     assert_equal 11, @todd.board.cells.values.count {|cell| cell.ship == nil}
   end
 
 end
-# place_computer_systems_or_whatever
-#   for each of our ships
-#     try to place the ship unil we place the ship
-#   end
-# we need a board to place ships on
-# we need ships to place
-# we need a computer/algorythm
