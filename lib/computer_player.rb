@@ -57,10 +57,9 @@ class ComputerPlayer
   end
 
   def place_one_ship(ship)
-    cells_to_place_ship(ship).each do |cell|
+    cells = cells_to_place_ship(ship)
+    @board.place(ship, cells)
 
-      @board.cells[cell].place_ship(ship)
-    end
   end
 
 

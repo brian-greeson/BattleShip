@@ -35,7 +35,7 @@ class HumanPlayer
         puts "Those are invalid coordinates. Please try again:"
       end
     end
-    
+
     puts @board.render(true)
   end
 
