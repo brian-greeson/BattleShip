@@ -4,7 +4,6 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 
-
 class BoardTest < Minitest::Test
 
   def setup

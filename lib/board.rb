@@ -1,6 +1,6 @@
-require "pry"
 class Board
   attr_reader :cells
+
   def initialize
     @cells = {}
     cell_names = create_list_of_cells
